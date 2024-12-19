@@ -175,7 +175,7 @@ class BasicTests(TestCase):
         request = None
         if not app_settings.SITES_ENABLED:
             request = self.factory.get("/")
-            request.META["SERVER_NAME"] = "example.com"
+            request.META["SERVER_NAME"] = "deskpai.com"
         self.assertEqual(
             utils.build_absolute_uri(request, "/foo"), "http://example.com/foo"
         )

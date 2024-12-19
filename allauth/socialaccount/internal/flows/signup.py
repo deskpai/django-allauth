@@ -23,7 +23,12 @@ def get_pending_signup(request):
 
 def redirect_to_signup(request, sociallogin):
     request.session["socialaccount_sociallogin"] = sociallogin.serialize()
-    return headed_redirect_response("socialaccount_signup")
+    from django.http import HttpResponseRedirect
+    from django.conf import settings
+    if hasattr(settings, "SOCIALACCOUNT_SIGNUP_REDIRECT_URL"):
+        return HttpResponseRedirect(settings.SOCIALACCOUNT_SIGNUP_REDIRECT_URL)
+    else:
+        return headed_redirect_response("socialaccount_signup")
 
 
 def clear_pending_signup(request):
